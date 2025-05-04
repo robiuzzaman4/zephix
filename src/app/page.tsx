@@ -1,11 +1,12 @@
-import React from 'react'
+import Hero from "@/components/pages/home/hero";
+import React from "react";
 
 const HomePage = () => {
   return (
     <div>
-      <h1 className="text-5xl font-medium text-rose-500">HomePage</h1>
+      <Hero />
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
