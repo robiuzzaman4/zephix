@@ -7,12 +7,15 @@ import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "./ui/sheet";
+} from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const navlinks = [
   {
@@ -58,7 +61,11 @@ const Navbar = () => {
 
         {/* mobile navbar */}
         <Sheet>
-          <SheetTrigger className="lg:hidden">Open</SheetTrigger>
+          <SheetTrigger className="lg:hidden" asChild>
+            <Button size="icon" variant="outline">
+              <Menu />
+            </Button>
+          </SheetTrigger>
           <SheetContent side="left">
             <SheetHeader className="sr-only">
               <SheetTitle>Are you absolutely sure?</SheetTitle>
@@ -70,16 +77,17 @@ const Navbar = () => {
 
             <div className="flex flex-col gap-2 mt-6">
               {navlinks.map((link) => (
-                <Link
-                  href={link.href}
-                  key={link.label}
-                  className={cn("text-base font-medium w-full px-4 py-1", {
-                    "text-primary bg-secondary rounded-md":
-                      pathname === link.href,
-                  })}
-                >
-                  {link.label}
-                </Link>
+                <SheetClose key={link.label} asChild>
+                  <Link
+                    href={link.href}
+                    className={cn("text-base font-medium w-full px-4 py-1", {
+                      "text-primary bg-secondary rounded-md":
+                        pathname === link.href,
+                    })}
+                  >
+                    {link.label}
+                  </Link>
+                </SheetClose>
               ))}
             </div>
           </SheetContent>
